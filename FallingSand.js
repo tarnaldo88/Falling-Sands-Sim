@@ -22,18 +22,38 @@ let w = 10;
 let cols, rows;
 
 function setup(){
-    createCanvas(400,400);
+    createCanvas(500, 300);
+    colorMode(HSB, 360, 255, 255);
     cols = width / w;
-    rows = height / w;;
-    grid = make2DArray(cols, rows);
-
-    //set every square to 0
-    for(let i = 0; i < cols; i++){
-        for(let j = 0; j < rows; j++){
-            grid[i][j] = 0;
-        }
-    }
+    rows = height / w;
+    grid = make2DArray(cols, rows)
 }
+
+function mouseDragged() {
+  let mouseCol = floor(mouseX / w);
+  let mouseRow = floor(mouseY / w);
+  
+  // Randomly add an area of sand particles
+  let matrix = 5;
+  let extent = floor(matrix / 2);
+  for (let i = -extent; i <= extent; i++) {
+    for (let j = -extent; j <= extent; j++) {
+      if (random(1) < 0.75) {
+        let col = mouseCol + i;
+        let row = mouseRow + j;
+        if (withinCols(col) && withinRows(row)) {
+          grid[col][row] = hueValue;
+        }
+      }
+    }
+  }
+  // Change the color of the sand over time
+  hueValue += 1;
+  if (hueValue > 360) {
+    hueValue = 1;
+  }
+}
+
 
 function draw() {
   background(0);
