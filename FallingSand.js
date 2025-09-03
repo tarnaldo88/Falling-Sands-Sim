@@ -27,7 +27,8 @@ let cols, rows;
 let hueValue = 1;
 
 function setup(){
-    createCanvas(500, 300);
+    const cnv = createCanvas(500, 300);
+    cnv.parent('sketch-holder');
     colorMode(HSB, 360, 255, 255);
     cols = width / w;
     rows = height / w;
