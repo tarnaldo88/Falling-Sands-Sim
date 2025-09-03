@@ -4,6 +4,10 @@ function make2DArray(cols, rows){
     let arr = new Array(cols);
     for(let i = 0; i < arr.length; i++){
         arr[i] = new Array(rows);
+        // Initialize all cells to 0 (empty) so comparisons like `=== 0` work
+        for (let j = 0; j < rows; j++) {
+          arr[i][j] = 0;
+        }
     }
     return arr;
 }
@@ -20,6 +24,7 @@ function withinRows(j) {
 let grid;
 let w = 10;
 let cols, rows;
+let hueValue = 1;
 
 function setup(){
     createCanvas(500, 300);
